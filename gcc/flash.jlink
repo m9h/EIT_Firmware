@@ -1,0 +1,5 @@
+r
+loadfile build/openeit.hex
+r
+g
+exit

@@ -24,8 +24,8 @@ License Agreement.
 #ifndef __DEVICE_H__
 #define __DEVICE_H__
 
-// verify presence of a supported compiler (Keil or IAR at this time)
-#if !defined(__ICCARM__) && !defined(__CC_ARM)
+// verify presence of a supported compiler (Keil, IAR or GCC)
+#if !defined(__ICCARM__) && !defined(__CC_ARM) && !defined(__GNUC__)
 #error "No supported compiler found, please install one of the minimim required compilers."
 #endif
 

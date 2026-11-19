@@ -1,0 +1,4 @@
+r
+h
+savebin spectra_flash_backup.bin 0x0 0x60000
+exit

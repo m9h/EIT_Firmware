@@ -176,15 +176,15 @@ static ADI_UART_DEV_DATA_TYPE UART_DevData[] =
            NULL,                                        /*!< rx buffer start address    */
            0,                                           /*!< rx buffer write index      */
            0,                                           /*!< rx buffer read index       */
-           NULL,                                        /*!< rx buffer size             */
+           0,                                           /*!< rx buffer size             */
            0,                                           /*!< available bytes            */
        },
        {
            NULL,                                        /*!< tx buffer start address    */
            0,                                           /*!< tx buffer read index       */
            0,                                           /*!< tx buffer write index      */
-           NULL,                                        /*!< tx buffer size             */
-           NULL,                                        /*!< number of free elements    */
+           0,                                           /*!< tx buffer size             */
+           0,                                           /*!< number of free elements    */
        },
 #endif /* (1 == ADI_UART_CFG_INTERRUPT_MODE_SUPPORT) */
 #if defined(ADI_DEBUG)

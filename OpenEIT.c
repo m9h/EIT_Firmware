@@ -657,6 +657,9 @@ void delay(uint32_t count)
     while(count>0)
     {
         count--;
+#if defined ( __GNUC__ )
+        __asm__ volatile ("");  /* keep the busy-wait loop when optimising */
+#endif
     }
 }
 

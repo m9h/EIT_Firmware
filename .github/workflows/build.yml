@@ -1,0 +1,25 @@
+name: firmware (gcc)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Arm GNU toolchain
+        run: sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi cmake ninja-build
+      - name: Build
+        run: |
+          cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=cmake/arm-none-eabi.cmake
+          cmake --build build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openeit-firmware-gcc
+          path: |
+            build/openeit.elf
+            build/openeit.hex
+            build/openeit.bin
+            build/openeit.map

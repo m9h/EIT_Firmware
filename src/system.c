@@ -170,7 +170,7 @@ static volatile bool_t privateIntOccFlag = false;
 
 #ifdef ADI_SYSTEM_CLOCK_TRANSITION
 
-static ADI_SYS_CLOCK_STATE_TYPE     currentState = NULL;
+static ADI_SYS_CLOCK_STATE_TYPE     currentState = (ADI_SYS_CLOCK_STATE_TYPE)0;
 
 /*----------------------------------------------------------------------------
   State parameters initialization
@@ -1752,34 +1752,34 @@ static const StateTableEntryType StateTransitionTable[] = {
 
 /*  from-state                              input-event                             to-state                                action                  */
     {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_ON,   ADI_SYS_CLOCK_STATE_MEASUREMENT,        aEnterMeasurementState, },
-    {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
     {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_USB_ON,           ADI_SYS_CLOCK_STATE_USB,                aEnterUSBState,         },
-    {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_USB_OFF,          NULL,                                   NULL,                   },
-    {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_USB_LPM,          NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_USB_OFF,          (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
+    {ADI_SYS_CLOCK_STATE_MINIMAL,           ADI_SYS_CLOCK_TRIGGER_USB_LPM,          (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
 
-    {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_ON,   NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_ON,   (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
     {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  ADI_SYS_CLOCK_STATE_MINIMAL,            aEnterMinimalState,     },
     {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_USB_ON,           ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,    aEnterUSBState,         },
-    {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_USB_OFF,          NULL,                                   NULL,                   },
-    {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_USB_LPM,          NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_USB_OFF,          (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
+    {ADI_SYS_CLOCK_STATE_MEASUREMENT,       ADI_SYS_CLOCK_TRIGGER_USB_LPM,          (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
 
     {ADI_SYS_CLOCK_STATE_USB,               ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_ON,   ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,    NULL,                   },
-    {ADI_SYS_CLOCK_STATE_USB,               ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  NULL,                                   NULL,                   },
-    {ADI_SYS_CLOCK_STATE_USB,               ADI_SYS_CLOCK_TRIGGER_USB_ON,           NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_USB,               ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
+    {ADI_SYS_CLOCK_STATE_USB,               ADI_SYS_CLOCK_TRIGGER_USB_ON,           (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
     {ADI_SYS_CLOCK_STATE_USB,               ADI_SYS_CLOCK_TRIGGER_USB_OFF,          ADI_SYS_CLOCK_STATE_MINIMAL,            aEnterMinimalState,     },
     {ADI_SYS_CLOCK_STATE_USB,               ADI_SYS_CLOCK_TRIGGER_USB_LPM,          ADI_SYS_CLOCK_STATE_USB_LPM,            aEnterUSBLPMState,      },
 
-    {ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,   ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_ON,   NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,   ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_ON,   (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
     {ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,   ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  ADI_SYS_CLOCK_STATE_USB,                NULL,                   },
-    {ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,   ADI_SYS_CLOCK_TRIGGER_USB_ON,           NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,   ADI_SYS_CLOCK_TRIGGER_USB_ON,           (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
     {ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,   ADI_SYS_CLOCK_TRIGGER_USB_OFF,          ADI_SYS_CLOCK_STATE_MEASUREMENT,        aEnterMeasurementState, },
     {ADI_SYS_CLOCK_STATE_USB_MEASUREMENT,   ADI_SYS_CLOCK_TRIGGER_USB_LPM,          ADI_SYS_CLOCK_STATE_MEASUREMENT,        aEnterMeasurementState, },
 
     {ADI_SYS_CLOCK_STATE_USB_LPM,           ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_ON,   ADI_SYS_CLOCK_STATE_MEASUREMENT,        aEnterMeasurementState, },
-    {ADI_SYS_CLOCK_STATE_USB_LPM,           ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_USB_LPM,           ADI_SYS_CLOCK_TRIGGER_MEASUREMENT_OFF,  (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
     {ADI_SYS_CLOCK_STATE_USB_LPM,           ADI_SYS_CLOCK_TRIGGER_USB_ON,           ADI_SYS_CLOCK_STATE_USB,                aEnterUSBState,         },
     {ADI_SYS_CLOCK_STATE_USB_LPM,           ADI_SYS_CLOCK_TRIGGER_USB_OFF,          ADI_SYS_CLOCK_STATE_MINIMAL,            aEnterMinimalState,     },
-    {ADI_SYS_CLOCK_STATE_USB_LPM,           ADI_SYS_CLOCK_TRIGGER_USB_LPM,          NULL,                                   NULL,                   },
+    {ADI_SYS_CLOCK_STATE_USB_LPM,           ADI_SYS_CLOCK_TRIGGER_USB_LPM,          (ADI_SYS_CLOCK_STATE_TYPE)0,NULL,                   },
 
 };
 

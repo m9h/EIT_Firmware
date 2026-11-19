@@ -85,12 +85,21 @@ typedef void  ( *ADIIntFunc )( void );
 typedef union { ADIIntFunc __fun; void * __ptr;  IntFunc __ifunc; } IntVector;
 
 // Interrupt Vector Table
+#if defined ( __GNUC__ )
+// top of stack, provided by the GNU linker script (gcc/ADuCM350.ld)
+extern unsigned long _estack;
+__attribute__ ((section(VECTOR_SECTION), used))
+const IntVector __vector_table[] =
+{
+    { .__ptr = (void *)&_estack },
+#else
 #pragma segment="CSTACK"
 #pragma location = ".intvec"
 const IntVector __vector_table[] =
 {
 	// grab stack pointer "end" address from ICF file
     { .__ptr = __sfe( "CSTACK" ) },
+#endif
 
 	// exception mappings...
     { .__ifunc = ResetISR                 } ,  // -15
